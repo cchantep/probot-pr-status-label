@@ -1,0 +1,54 @@
+{
+  "extends": [
+    "tslint:all",
+    "tslint-react",
+    "tslint-immutable",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "strict-boolean-expressions": true,
+    "comment-format": false,
+    "completed-docs": false,
+    "file-name-casing": false,
+    "interface-name": false,
+    "match-default-export-name": false,
+    "member-ordering": false,
+    "newline-before-return": false,
+    "no-array-mutation": [
+      true,
+      "ignore-new-array",
+      { "ignore-prefix": ["mut", "this.mut"] }
+    ],
+    "no-default-export": false,
+    "no-default-import": false,
+    "no-delete": true,
+    "no-implicit-dependencies": false,
+    "no-inferrable-types": false,
+    "no-let": [true, { "ignore-prefix": "mut" }],
+    "no-loop-statement": true,
+    "no-magic-numbers": false,
+    "no-method-signature": true,
+    "no-object-mutation": [true, { "ignore-prefix": ["mut", "this.mut"] }],
+    "no-submodule-imports": false,
+    "no-unused-variable": false,
+    "no-use-before-declare": false,
+    "no-var-keyword": true,
+    "object-literal-sort-keys": false,
+    "only-arrow-functions": false,
+    "ordered-imports": false,
+    "prefer-method-signature": false,
+    "prefer-switch": false,
+    "promise-function-async": false,
+    "readonly-array": [true, { "ignore-prefix": "mut" }],
+    "readonly-keyword": [true, { "ignore-prefix": "mut" }],
+    "typedef": [
+      true,
+      "call-signature",
+      "member-variable-declaration",
+      "parameter",
+      "property-declaration"
+    ],
+    "unnecessary-else": false,
+    "variable-name": false
+  }
+}
