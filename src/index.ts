@@ -20,6 +20,11 @@ export = (app: Application) => {
     context.log('Event:', event)
 
     const pr = event.pull_request
+
+    if (pr.state != 'open') {
+      return context.log.debug(`Skip label event on closed pull request #${pr.number}`)
+    }
+
     const config = await getConfig(context, pr.base.ref)
 
     context.log('Config:', config)
