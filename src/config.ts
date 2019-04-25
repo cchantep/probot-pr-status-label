@@ -23,8 +23,9 @@ import dc from './resources/pr-status-label.json'
 
 export const Config = t.exact(
   t.type({
-    successStatusRegex: t.string,
+    requiredStatusRegex: t.string,
     pendingStatusRegex: t.string,
+    successStatusRegex: t.string,
     errorStatusRegex: t.string,
   }),
 )
@@ -46,16 +47,34 @@ type Enc =
   | 'hex'
   | undefined
 
+export type LabelStatus = {
+  context: string,
+  commitState: CommitState,
+  internalState: CommitState | 'required'
+}
+
 // ---
 
-export function matchStatus(input: string, c: IConfig): Option<[CommitState, string]> {
+export function matchStatus(input: string, c: IConfig): Option<LabelStatus> {
   return _matchStatus(input, c.successStatusRegex)
     .map(s => {
-      const res: [CommitState, string] = ['success', s]
+      const res: LabelStatus = {
+        context: s,
+        commitState: 'success',
+        internalState: 'success'
+      }
+
       return res
     })
-    .orElse(() => _matchStatus(input, c.pendingStatusRegex).map(s => ['pending', s]))
-    .orElse(() => _matchStatus(input, c.errorStatusRegex).map(s => ['error', s]))
+    .orElse(() => _matchStatus(input, c.requiredStatusRegex).map(s => {
+      return { context: s, commitState: 'pending', internalState: 'required' }
+    }))
+    .orElse(() => _matchStatus(input, c.pendingStatusRegex).map(s => {
+      return { context: s, commitState: 'pending', internalState: 'pending' }
+    }))
+    .orElse(() => _matchStatus(input, c.errorStatusRegex).map(s => {
+      return { context: s, commitState: 'error', internalState: 'error' }
+    }))
 }
 
 export function _matchStatus(input: string, re: string): Option<string> {

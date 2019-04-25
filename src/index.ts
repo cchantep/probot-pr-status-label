@@ -17,7 +17,7 @@ export = (app: Application) => {
   app.on('pull_request.labeled', async context => {
     const event = await util.fromEither(PullRequestLabelEvent.decode(context.payload))
 
-    context.log('Event:', event)
+    context.log.debug('Event:', event)
 
     const pr = event.pull_request
 
@@ -29,14 +29,17 @@ export = (app: Application) => {
 
     context.log('Config:', config)
 
+    // TODO: Check there is no other label matching expr of other state
+    // otherwise add warning as comment
+
     await matchStatus(event.label.name, config).fold(
       Promise.resolve(context.log(`Label '${event.label.name}' doesn't match status expressions`, config)),
-      m => {
-        const [state, status] = m
+      ls => {
+        context.log(`Toggle ${ls.context} to ${ls.commitState} (${ls.internalState}) on pull request #${pr.number} @ ${pr.head.sha}`)
 
-        context.log(`Toggle ${status} to ${state} on pull request #${pr.number} @ ${pr.head.sha}`)
+        const description = (ls.internalState != 'required') ? event.sender.login : ("Waiting for someone to check it ..." /* TODO: get label description + config */)
 
-        return toggleState(context, status, pr.head.sha, state, event.sender.login)
+        return toggleState(context, ls.context, pr.head.sha, ls.commitState, description)
       },
     )
   })
@@ -55,7 +58,7 @@ export = (app: Application) => {
     const statusLabels: ReadonlyArray<CommitStatus> = pr.labels
       .map(label =>
         matchStatus(label.name, config).fold(new Array<CommitStatus>(), m => {
-          const found = statuses.find(st => m[0] == st.state && m[1] == st.context)
+          const found = statuses.find(st => m.commitState == st.state && m.context == st.context)
 
           return !!found ? [found] : []
         }),

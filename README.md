@@ -15,14 +15,16 @@ a file named [`pr-status-label.json`](./src/resources/pr-status-label.json) can 
 
 ```json
 {
-  "successStatusRegex": "^:[^:]+: ([^:]+):(?:ok|success)$",
+  "requiredStatusRegex": "^:[^:]+: ([^:]+):required$",
   "pendingStatusRegex": "^:[^:]+: ([^:]+):pending$",
+  "successStatusRegex": "^:[^:]+: ([^:]+):(?:ok|success)$",
   "errorStatusRegex": "^:[^:]+: ([^:]+):(ko|error)$"
 }
 ```
 
-- `successStatusRegex`: Detects a label as a success status; Starts with an emoji code, followed after a space by a status (capture group), and finally after a `:` separator either `ok` or `success` (e.g. `:ok_hand: review:ok`).
+- `requiredStatusRegex": Detects a label as a required status (like `pending` but before any action).
 - `pendingStatusRegex`: Detects a label as a pending status (e.g. `:eyes: review:pending`).
+- `successStatusRegex`: Detects a label as a success status; Starts with an emoji code, followed after a space by a status (capture group), and finally after a `:` separator either `ok` or `success` (e.g. `:ok_hand: review:ok`).
 - `errorStatusRegex`: Detects a label as an error (e.g. `:flushed: review:ko`)
 
 ## Build
