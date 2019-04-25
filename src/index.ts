@@ -35,9 +35,16 @@ export = (app: Application) => {
     await matchStatus(event.label.name, config).fold(
       Promise.resolve(context.log(`Label '${event.label.name}' doesn't match status expressions`, config)),
       ls => {
-        context.log(`Toggle ${ls.context} to ${ls.commitState} (${ls.internalState}) on pull request #${pr.number} @ ${pr.head.sha}`)
+        context.log(
+          `Toggle ${ls.context} to ${ls.commitState} (${ls.internalState}) on pull request #${pr.number} @ ${
+            pr.head.sha
+          }`,
+        )
 
-        const description = (ls.internalState != 'required') ? event.sender.login : ("Waiting for someone to check it ..." /* TODO: get label description + config */)
+        const description =
+          ls.internalState != 'required'
+            ? event.sender.login
+            : 'Waiting for someone to check it ...' /* TODO: get label description + config */
 
         return toggleState(context, ls.context, pr.head.sha, ls.commitState, description)
       },

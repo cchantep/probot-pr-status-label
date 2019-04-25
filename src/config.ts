@@ -48,8 +48,8 @@ type Enc =
   | undefined
 
 export type LabelStatus = {
-  context: string,
-  commitState: CommitState,
+  context: string
+  commitState: CommitState
   internalState: CommitState | 'required'
 }
 
@@ -61,20 +61,26 @@ export function matchStatus(input: string, c: IConfig): Option<LabelStatus> {
       const res: LabelStatus = {
         context: s,
         commitState: 'success',
-        internalState: 'success'
+        internalState: 'success',
       }
 
       return res
     })
-    .orElse(() => _matchStatus(input, c.requiredStatusRegex).map(s => {
-      return { context: s, commitState: 'pending', internalState: 'required' }
-    }))
-    .orElse(() => _matchStatus(input, c.pendingStatusRegex).map(s => {
-      return { context: s, commitState: 'pending', internalState: 'pending' }
-    }))
-    .orElse(() => _matchStatus(input, c.errorStatusRegex).map(s => {
-      return { context: s, commitState: 'error', internalState: 'error' }
-    }))
+    .orElse(() =>
+      _matchStatus(input, c.requiredStatusRegex).map(s => {
+        return { context: s, commitState: 'pending', internalState: 'required' }
+      }),
+    )
+    .orElse(() =>
+      _matchStatus(input, c.pendingStatusRegex).map(s => {
+        return { context: s, commitState: 'pending', internalState: 'pending' }
+      }),
+    )
+    .orElse(() =>
+      _matchStatus(input, c.errorStatusRegex).map(s => {
+        return { context: s, commitState: 'error', internalState: 'error' }
+      }),
+    )
 }
 
 export function _matchStatus(input: string, re: string): Option<string> {
@@ -93,7 +99,6 @@ function getFromJson(bot: Context, path: string, ref: string): Promise<{}> {
   })
 }
 
-// TODO: Fallback to DefaultConfig (or Option)
 export function getConfig(bot: Context, ref: string): Promise<IConfig> {
   return getFromJson(bot, '.github/pr-status-label.json', ref)
     .then(json => util.fromEither(Config.decode(json)))

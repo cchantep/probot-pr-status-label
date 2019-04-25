@@ -6,7 +6,7 @@ A GitHub App built with [Probot](https://github.com/probot/probot) that Probot a
 
 Add a label matching a status expression (see [*Configuration*](#configuration); e.g. ':ok_hand: review:ok').
 
-![CircleCI](./docs/usage.gif)
+![Usage](./docs/usage.gif)
 
 ### Configuration
 

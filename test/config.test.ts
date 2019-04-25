@@ -38,7 +38,7 @@ describe('Configuration', () => {
     expect(r0.toUndefined()).toEqual({
       commitState: 'pending',
       internalState: 'required',
-      context: 'qa'
+      context: 'qa',
     })
   })
 
@@ -48,7 +48,7 @@ describe('Configuration', () => {
     expect(r3.toUndefined()).toEqual({
       commitState: 'pending',
       internalState: 'pending',
-      context: 'qa'
+      context: 'qa',
     })
   })
 
@@ -58,7 +58,7 @@ describe('Configuration', () => {
     const expected: LabelStatus = {
       commitState: 'success',
       context: 'review',
-      internalState: 'success'
+      internalState: 'success',
     }
 
     expect(r1.toUndefined()).toEqual(expected)
@@ -71,7 +71,7 @@ describe('Configuration', () => {
     expect(r4.toUndefined()).toEqual({
       commitState: 'error',
       internalState: 'error',
-      context: 'design'
+      context: 'design',
     })
   })
 })
