@@ -1,6 +1,6 @@
 {
   "name": "pr-label-status",
-  "version": "1.0.0-SNAPSHOT",
+  "version": "1.0.0",
   "description": "Probot app that sets pull request statuses according labels",
   "author": "Cédric Chantepie <cchantep@no-reply.org> (https://github.com/cchantep)",
   "license": "ISC",

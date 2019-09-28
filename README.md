@@ -27,6 +27,23 @@ a file named [`pr-status-label.json`](./src/resources/pr-status-label.json) can 
 - `successStatusRegex`: Detects a label as a success status; Starts with an emoji code, followed after a space by a status (capture group), and finally after a `:` separator either `ok` or `success` (e.g. `:ok_hand: review:ok`).
 - `errorStatusRegex`: Detects a label as an error (e.g. `:flushed: review:ko`)
 
+### GitHub Actions
+
+To use this bot with [GitHub Actions](https://github.com/features/actions), the following workflow can be defined as `.github/workflows/pr-status-label.yml` in your repository.
+
+```
+name: PR milestone
+on: [issues, pull_request]
+
+jobs:
+  check_pr_milestone:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: cchantep/probot-pr-status-label@ghaction-1.0.x
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
 ## Build
 
 ```sh
