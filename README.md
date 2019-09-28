@@ -32,7 +32,7 @@ a file named [`pr-status-label.json`](./src/resources/pr-status-label.json) can 
 To use this bot with [GitHub Actions](https://github.com/features/actions), the following workflow can be defined as `.github/workflows/pr-status-label.yml` in your repository.
 
 ```
-name: PR milestone
+name: PR status label
 on: [issues, pull_request]
 
 jobs:
