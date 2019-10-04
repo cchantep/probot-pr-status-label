@@ -35,8 +35,6 @@ To use this bot with [GitHub Actions](https://github.com/features/actions), the 
 name: PR status label
 
 on
-  issues:
-    types: ['milestoned', 'demilestoned']
   pull_request:
     types: ['labeled', 'synchronize']
 
