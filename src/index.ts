@@ -36,9 +36,7 @@ export = (app: Application) => {
       Promise.resolve(context.log(`Label '${event.label.name}' doesn't match status expressions`, config)),
       ls => {
         context.log(
-          `Toggle ${ls.context} to ${ls.commitState} (${ls.internalState}) on pull request #${pr.number} @ ${
-            pr.head.sha
-          }`,
+          `Toggle ${ls.context} to ${ls.commitState} (${ls.internalState}) on pull request #${pr.number} @ ${pr.head.sha}`,
         )
 
         const description =
