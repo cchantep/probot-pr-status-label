@@ -1,6 +1,6 @@
 # pr-status-label
 
-A GitHub App built with [Probot](https://github.com/probot/probot) that Probot app that sets pull request statuses according labels.
+A GitHub App built with [Probot](https://github.com/probot/probot) that sets pull request statuses according labels.
 
 ## Usage
 
