@@ -4,5 +4,5 @@ branding:
   icon: 'git-pull-request'
   color: 'blue'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: 'node12'
+  main: './node_modules/probot/bin/probot.js'
