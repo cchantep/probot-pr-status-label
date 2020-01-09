@@ -30,7 +30,7 @@
     "nock": "^11.3.5",
     "@types/nock": "^11.1.0",
     "@types/jest": "^24.0.0",
-    "@types/node": "^12.7.11",
+    "@types/node": "^13.1.5",
     "eslint-plugin-typescript": "^0.14.0",
     "jest": "^24.0.0",
     "nodemon": "^2.0.1",
