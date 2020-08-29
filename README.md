@@ -34,7 +34,7 @@ To use this bot with [GitHub Actions](https://github.com/features/actions), the 
 ```
 name: PR status label
 
-on
+on:
   pull_request:
     types: ['labeled', 'synchronize']
 
