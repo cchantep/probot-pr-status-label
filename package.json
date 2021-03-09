@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "probot": "^9.5.0",
-    "io-ts": "^1.8.5"
+    "io-ts": "^2.2.16"
   },
   "devDependencies": {
     "nock": "^12.0.1",
