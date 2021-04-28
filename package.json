@@ -23,7 +23,7 @@
     "test:watch": "jest --watch --notify --notifyMode=change --coverage"
   },
   "dependencies": {
-    "probot": "^9.5.0",
+    "probot": "^11.2.3",
     "io-ts": "^1.8.5"
   },
   "devDependencies": {
